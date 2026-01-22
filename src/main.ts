@@ -51,22 +51,25 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter(app.get(HttpAdapterHost)));
   const origins = appConfig.domain
     ? [
-        new RegExp(
-          `^http[s]{0,1}://(?:${appConfig.domain}|[a-z0-9-]+.${appConfig.domain})$`,
-        ),
-        new RegExp(
-          `^http[s]{0,1}://(?:${'nodeprime.io'}|[a-z0-9-]+.${'nodeprime.io'})$`,
-        ),
-      ]
+      new RegExp(
+        `^http[s]{0,1}://(?:${appConfig.domain}|[a-z0-9-]+.${appConfig.domain})$`,
+      ),
+      new RegExp(
+        `^http[s]{0,1}://(?:${'nodeprime.io'}|[a-z0-9-]+.${'nodeprime.io'})$`,
+      ),
+      new RegExp(
+        `^http[s]{0,1}://(?:${'mstblockchain.com'}|[a-z0-9-]+.${'mstblockchain.com'})$`,
+      ),
+    ]
     : [];
   app.enableCors({
     origin: utilsService.isProductionApp()
       ? origins
       : [
-          'null',
-          new RegExp(`^http[s]{0,1}://(?:127.0.0.1|localhost)(:[0-9]+)*$`),
-          ...origins,
-        ],
+        'null',
+        new RegExp(`^http[s]{0,1}://(?:127.0.0.1|localhost)(:[0-9]+)*$`),
+        ...origins,
+      ],
     credentials: true,
   });
   app.use(cookieParser());
@@ -84,9 +87,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-spec', app, document, {
-    customSiteTitle: `${
-      appConfig.platformName || ''
-    } OpenAPI Specification`.trim(),
+    customSiteTitle: `${appConfig.platformName || ''
+      } OpenAPI Specification`.trim(),
     swaggerOptions: {
       persistAuthorization: true,
     },

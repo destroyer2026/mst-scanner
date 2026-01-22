@@ -12,8 +12,7 @@ type CurrentLog = Log & { old_value: string };
 @Injectable()
 export class TokensService
   extends BaseService
-  implements OnApplicationBootstrap
-{
+  implements OnApplicationBootstrap {
   constructor(
     private readonly prisma: PrismaService,
     private readonly ledgerService: LedgerService,
@@ -45,7 +44,7 @@ export class TokensService
     );
 
     // Periodic run
-    setTimeout(() => this.initSync(), 5000);
+    setTimeout(() => this.initSync(), 10000);
   }
 
   // Method to sync ERC20 token data into the scanner
@@ -626,8 +625,8 @@ export class TokensService
               totalSupply:
                 tokenTransfer.fromAddress === ethers.ZeroAddress
                   ? {
-                      increment: 1,
-                    }
+                    increment: 1,
+                  }
                   : undefined,
               totalHolders: totalHoldersResponse[0].holders,
               syncedTillBlock: tokenTransfer.blockNumber,

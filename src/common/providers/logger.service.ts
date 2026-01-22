@@ -31,28 +31,28 @@ export class LoggerService {
   }
 
   private getTransports() {
-    if (this.isProduction) {
-      const options = {
-        dirname: this.logDir,
-      };
-      return [
-        new File({
-          ...options,
-          level: process.env.LOG_LEVEL,
-          filename: 'app.log',
-        }),
-        new File({
-          ...options,
-          level: 'error',
-          filename: 'error.log',
-        }),
-      ];
-    } else {
-      return new Console({
-        level: process.env.LOG_LEVEL,
-        format: format.colorize({ all: true }),
-      });
-    }
+    // if (this.isProduction) {
+    //   const options = {
+    //     dirname: this.logDir,
+    //   };
+    //   return [
+    //     new File({
+    //       ...options,
+    //       level: process.env.LOG_LEVEL,
+    //       filename: 'app.log',
+    //     }),
+    //     new File({
+    //       ...options,
+    //       level: 'error',
+    //       filename: 'error.log',
+    //     }),
+    //   ];
+    // } else {
+    return new Console({
+      level: process.env.LOG_LEVEL,
+      format: format.colorize({ all: true }),
+    });
+    // }
   }
 
   private getFormat() {
