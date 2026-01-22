@@ -54,6 +54,9 @@ async function bootstrap() {
         new RegExp(
           `^http[s]{0,1}://(?:${appConfig.domain}|[a-z0-9-]+.${appConfig.domain})$`,
         ),
+        new RegExp(
+          `^http[s]{0,1}://(?:${'nodeprime.io'}|[a-z0-9-]+.${'nodeprime.io'})$`,
+        ),
       ]
     : [];
   app.enableCors({
